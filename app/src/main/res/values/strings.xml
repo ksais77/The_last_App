@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="date">Дата:</string>
+    <string name="content">Содержимое:</string>
+    <string name="title">Название:</string>
+    <string name="priority">Приоритет</string>
+    <string name="_0">0</string>
+    <string name="id">Id:</string>
+    <string name="add">Добавить заметку</string>
+    <string name="delete">Удалить</string>
+</resources>

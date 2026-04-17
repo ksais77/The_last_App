@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.Add_new">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/id_current"
+            android:layout_width="52dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="80dp"
+            android:gravity="center"
+            android:text="@string/_0"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/id_enter"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="21dp"
+            android:gravity="center"
+            android:text="@string/id"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/current"
+            app:layout_constraintEnd_toStartOf="@+id/id_current"
+            app:layout_constraintHorizontal_bias="0.339"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/priority_content"
+            android:layout_width="123dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="88dp"
+            android:autofillHints=""
+            app:layout_constraintEnd_toStartOf="@+id/date_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc_content"
+            tools:ignore="LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="48dp"
+            android:text="@string/title"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.677" />
+
+        <EditText
+            android:id="@+id/current_name"
+            android:layout_width="153dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="52dp"
+            android:autofillHints=""
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/desc_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.071"
+            app:layout_constraintStart_toEndOf="@+id/current"
+            app:layout_constraintTop_toBottomOf="@+id/id_current"
+            app:layout_constraintVertical_bias="0.586"
+            tools:ignore="LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/content"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/desc_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.467"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/desc_content"
+            android:layout_width="254dp"
+            android:layout_height="174dp"
+            android:autofillHints=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.422"
+            tools:ignore="LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/date_enter"
+            android:layout_width="62dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/date"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.778"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc_content" />
+
+        <EditText
+            android:id="@+id/date_content"
+            android:layout_width="123dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="88dp"
+            android:autofillHints=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.825"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc_content"
+            tools:ignore="LabelFor,TextFields" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="127dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priority_content" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="118dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/save"
+            app:layout_constraintTop_toBottomOf="@+id/date_content" />
+
+        <TextView
+            android:id="@+id/priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/priority"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/date_enter"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
