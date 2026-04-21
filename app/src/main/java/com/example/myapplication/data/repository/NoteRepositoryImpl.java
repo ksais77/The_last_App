@@ -47,6 +47,7 @@ public  class NoteRepositoryImpl extends NoteRepository {
         Log.d("NoteRepositoryImpl", "Обновление выполнено");
     }
     @Override
+
     public void deleteNote(Note note) {
         NoteEntity entity = NoteMapper.toEntity(note);
         noteDao.delete(entity);
