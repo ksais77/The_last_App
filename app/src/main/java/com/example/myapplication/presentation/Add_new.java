@@ -15,20 +15,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.myapplication.data.db.NoteEntity;
-import com.example.myapplication.data.db.NoteMapper;
-import com.example.myapplication.domain.model.Note;
 import com.example.myapplication.R;
-import com.example.myapplication.data.db.NoteDao;
+
 import com.example.myapplication.data.db.NoteDatabase;
+
+import com.example.myapplication.data.repository.NoteRepositoryImpl;
+import com.example.myapplication.domain.model.Note;
+import com.example.myapplication.domain.model.repository.NoteRepository;
+import com.example.myapplication.domain.model.usecase.InsertNoteUseCase;
+import com.example.myapplication.domain.model.usecase.UpdateNoteUseCase;
+import com.example.myapplication.domain.model.usecase.GetByIdNoteUseCase;
 
 public class Add_new extends AppCompatActivity {
     Button btn_ok, btn_cancel;
     EditText title, desc, date, priority;
     TextView notes_id;
     int id;
-    NoteDatabase db;
-    NoteDao notedao;
+
+    private InsertNoteUseCase insertNoteUseCase;
+    private UpdateNoteUseCase updateNoteUseCase;
+    private GetByIdNoteUseCase getNoteByIdUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,13 @@ public class Add_new extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_new);
 
-        db = NoteDatabase.getInstance(this);
-        notedao = db.noteDao();
+
+        NoteDatabase db = NoteDatabase.getInstance(this);
+        NoteRepository repository = new NoteRepositoryImpl(db.noteDao());
+
+        insertNoteUseCase = new InsertNoteUseCase(repository);
+        updateNoteUseCase = new UpdateNoteUseCase(repository);
+        getNoteByIdUseCase = new GetByIdNoteUseCase(repository);
 
         btn_ok = findViewById(R.id.save);
         btn_cancel = findViewById(R.id.cancel);
@@ -60,7 +71,6 @@ public class Add_new extends AppCompatActivity {
             String descText = desc.getText().toString().trim();
             String dateText = date.getText().toString().trim();
             String priorityText = priority.getText().toString().trim();
-
 
             if (titleText.isEmpty()) {
                 title.setError("Введите заголовок");
@@ -90,8 +100,7 @@ public class Add_new extends AppCompatActivity {
         @Override
         protected Note doInBackground(Integer... params) {
             int noteId = params[0];
-            NoteEntity entity = notedao.getById(noteId);
-            return NoteMapper.toDomain(entity);
+            return getNoteByIdUseCase.execute(noteId);
         }
 
         @Override
@@ -111,9 +120,7 @@ public class Add_new extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Note... notes) {
             try {
-                NoteEntity entity = NoteMapper.toEntity(notes[0]);
-                notedao.insertAll(entity);
-                return true;
+                return insertNoteUseCase.execute(notes[0]);
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -134,15 +141,13 @@ public class Add_new extends AppCompatActivity {
         }
     }
 
-
     @SuppressLint("StaticFieldLeak")
     private class UpdateNoteTask extends AsyncTask<Note, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Note... notes) {
             try {
-                NoteEntity entity = NoteMapper.toEntity(notes[0]);
-                notedao.update(entity);
-                return true;
+                return updateNoteUseCase.execute(notes[0]);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;

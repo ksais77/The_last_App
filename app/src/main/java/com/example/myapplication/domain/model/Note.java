@@ -63,7 +63,7 @@ public class Note {
         this.id = id;
     }
 
-    public void setTitle(String title) {
+    public void setTittle(String title) {
         this.title = title;
     }
 

@@ -1,5 +1,7 @@
 package com.example.myapplication.data.db;
 
+import android.util.Log;
+
 import com.example.myapplication.domain.model.Note;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class NoteMapper {
     }
 
     public static NoteEntity toEntity(Note note) {
+        Log.d("NoteMapper", "toEntity: " + note.getTittle());
         if (note == null) {
             return null;
         }
@@ -32,7 +35,9 @@ public class NoteMapper {
                 note.getDescription(),
                 note.getDate(),
                 note.getPriority()
+
         );
+
     }
 
 
