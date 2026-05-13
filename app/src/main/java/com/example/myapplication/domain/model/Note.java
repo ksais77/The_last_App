@@ -2,7 +2,9 @@ package com.example.myapplication.domain.model;
 
 import androidx.annotation.NonNull;
 
-import com.example.myapplication.data.db.NoteEntity;
+
+
+import java.util.Comparator;
 
 
 public class Note {
@@ -11,17 +13,22 @@ public class Note {
     public int id;
     public String title;
     public String description;
-    private  String date,priority;
+    private  String priority;
+    private  long date;
 
-    public Note(String title, String description, String date, String priority) {
+    public Note(int id, String title, String description, String priority) {
         this.id = 0;
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.date = System.currentTimeMillis();
         this.priority = priority;
     }
+    public  static Comparator<Note> NoteNameAZComparator = Comparator.comparing(Note::getTittle);
+    public  static Comparator<Note> NoteNameZAComparator = (n1, n2) -> n2.getTittle().compareTo(n1.getTittle());
+    public  static Comparator<Note> NoteNameDateAscComparator = (n1, n2) -> Long.compare(n1.getDate(),n2.getDate());
+    public static Comparator<Note> NoteDateDescComparator = (n1, n2) -> Long.compare(n2.getDate(), n1.getDate());
 
-    public Note(int id,String title,String date,String description,String priority){
+    public Note(int id, String title, long date, String description, String priority){
         this.id=id;
         this.title=title;
         this.date=date;
@@ -35,7 +42,7 @@ public class Note {
         return "Заметка: ("+
                 "id="+id+
                 "заголовок="+title+'\''+
-                "дата="+date+
+                "дата="+ getFormattedDate() +
                 "описание="+description+'\''+
                 ')';
 
@@ -47,7 +54,7 @@ public class Note {
         return title;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -71,11 +78,15 @@ public class Note {
         this.description = description;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+    public String getFormattedDate() {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm", java.util.Locale.getDefault());
+        return sdf.format(new java.util.Date(date));
     }
 }

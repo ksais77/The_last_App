@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 
 
-@Database(entities = {NoteEntity.class}, version = 2)
+@Database(entities = {NoteEntity.class}, version = 3)
 public abstract class NoteDatabase extends RoomDatabase {
     public abstract NoteDao noteDao();
 

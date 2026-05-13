@@ -47,7 +47,7 @@
             android:layout_height="37dp"
             android:layout_marginTop="88dp"
             android:autofillHints=""
-            app:layout_constraintEnd_toStartOf="@+id/date_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc_content"
             tools:ignore="LabelFor,TextFields" />
@@ -106,30 +106,6 @@
             app:layout_constraintVertical_bias="0.422"
             tools:ignore="LabelFor,TextFields" />
 
-        <TextView
-            android:id="@+id/date_enter"
-            android:layout_width="62dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/date"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.778"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc_content" />
-
-        <EditText
-            android:id="@+id/date_content"
-            android:layout_width="123dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="88dp"
-            android:autofillHints=""
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.825"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc_content"
-            tools:ignore="LabelFor,TextFields" />
-
         <Button
             android:id="@+id/save"
             android:layout_width="127dp"
@@ -145,26 +121,22 @@
             android:id="@+id/cancel"
             android:layout_width="118dp"
             android:layout_height="58dp"
-            android:layout_marginEnd="52dp"
+            android:layout_marginEnd="56dp"
             android:layout_marginBottom="16dp"
             android:text="@string/cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/save"
-            app:layout_constraintTop_toBottomOf="@+id/date_content" />
+            app:layout_constraintTop_toBottomOf="@+id/priority_content" />
 
         <TextView
             android:id="@+id/priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
             android:layout_marginTop="40dp"
             android:text="@string/priority"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/date_enter"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc_content" />
 

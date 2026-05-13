@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "notes")
 public class NoteEntity {
 
@@ -17,20 +19,20 @@ public class NoteEntity {
     private  String description;
 
     @ColumnInfo(name = "date")
-    private  String date;
+    private  long date;
 
     @ColumnInfo(name = "priority")
     private  String priority;
 
 
-    public NoteEntity(String title, String date, String description, String priority){
+    public NoteEntity(String title,String description, String priority){
         this.title=title;
-        this.date=date;
+        this.date = System.currentTimeMillis();
         this.description=description;
         this.priority=priority;
 
     }
-    public NoteEntity(int id, String title, String description, String date, String priority) {
+    public NoteEntity(int id, String title, String description, long date, String priority) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -60,10 +62,13 @@ public class NoteEntity {
         return title;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
-
+    public String getFormattedDate() {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm", java.util.Locale.getDefault());
+        return sdf.format(new Date(date));
+    }
     public String getDescription() {
         return description;
     }
@@ -80,7 +85,7 @@ public class NoteEntity {
         this.description = description;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

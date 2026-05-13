@@ -18,7 +18,6 @@ public class NoteMapper {
                 entity.getId(),
                 entity.getTittle(),
                 entity.getDescription(),
-                entity.getDate(),
                 entity.getPriority()
         );
     }

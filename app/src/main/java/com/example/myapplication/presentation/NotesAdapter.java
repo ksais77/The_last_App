@@ -26,7 +26,7 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder> {
 
-    private final List<Note> notes;
+    private List<Note> notes;
     private final Context context;
     private final NoteDao noteDao;
 
@@ -35,6 +35,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         this.context = context;
         NoteDatabase db = NoteDatabase.getInstance(context);
         noteDao = db.noteDao();
+    }
+    public void updateNotes(List<Note> newNotes) {
+        this.notes = newNotes;
+        notifyDataSetChanged();
     }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +67,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         Note note = notes.get(position);
 
         holder.title.setText(note.getTittle());
-        holder.date.setText(note.getDate());
+        holder.date.setText(note.getFormattedDate());
         holder.desc.setText(note.getDescription());
 
         if (note.getPriority().equals("важно")) {
@@ -128,5 +132,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                 Toast.makeText(context, "Ошибка", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 }

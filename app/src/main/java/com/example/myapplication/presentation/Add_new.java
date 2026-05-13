@@ -28,7 +28,7 @@ import com.example.myapplication.domain.model.usecase.GetByIdNoteUseCase;
 
 public class Add_new extends AppCompatActivity {
     Button btn_ok, btn_cancel;
-    EditText title, desc, date, priority;
+    EditText title, desc, priority;
     TextView notes_id;
     int id;
 
@@ -55,7 +55,6 @@ public class Add_new extends AppCompatActivity {
 
         title = findViewById(R.id.current_name);
         desc = findViewById(R.id.desc_content);
-        date = findViewById(R.id.date_content);
         priority = findViewById(R.id.priority_content);
         notes_id = findViewById(R.id.id_current);
 
@@ -69,7 +68,6 @@ public class Add_new extends AppCompatActivity {
         btn_ok.setOnClickListener(v -> {
             String titleText = title.getText().toString().trim();
             String descText = desc.getText().toString().trim();
-            String dateText = date.getText().toString().trim();
             String priorityText = priority.getText().toString().trim();
 
             if (titleText.isEmpty()) {
@@ -78,10 +76,10 @@ public class Add_new extends AppCompatActivity {
             }
 
             if (id >= 0) {
-                Note updateNote = new Note(id, titleText, descText, dateText, priorityText);
+                Note updateNote = new Note(id, titleText, descText, priorityText);
                 new UpdateNoteTask().execute(updateNote);
             } else {
-                Note newNote = new Note(0, titleText, descText, dateText, priorityText);
+                Note newNote = new Note(0, titleText, descText, priorityText);
                 new InsertNoteTask().execute(newNote);
             }
         });
@@ -109,7 +107,6 @@ public class Add_new extends AppCompatActivity {
             if (note != null) {
                 title.setText(note.getTittle());
                 desc.setText(note.getDescription());
-                date.setText(note.getDate());
                 priority.setText(note.getPriority());
                 notes_id.setText(String.valueOf(note.getId()));
             }

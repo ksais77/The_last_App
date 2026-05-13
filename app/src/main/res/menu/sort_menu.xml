@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_aToz"
+        android:title="А → Я"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_zToa"
+        android:title="Я → А"
+
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_dateAsc"
+        android:title="Старые → Новые"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_dateDesc"
+        android:title="Новые → Старые"
+        app:showAsAction="never" />
+</menu>
