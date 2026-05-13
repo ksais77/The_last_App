@@ -76,8 +76,7 @@ public class Add_new extends AppCompatActivity {
             }
 
             if (id >= 0) {
-                Note updateNote = new Note(id, titleText, descText, priorityText);
-                new UpdateNoteTask().execute(updateNote);
+                new LoadAndUpdateNoteTask((int) id, titleText, descText, priorityText).execute();
             } else {
                 Note newNote = new Note(0, titleText, descText, priorityText);
                 new InsertNoteTask().execute(newNote);
@@ -98,7 +97,15 @@ public class Add_new extends AppCompatActivity {
         @Override
         protected Note doInBackground(Integer... params) {
             int noteId = params[0];
-            return getNoteByIdUseCase.execute(noteId);
+            android.util.Log.d("Add_new", "=== ЗАГРУЗКА ЗАМЕТКИ ID: " + noteId);
+            try {
+                Note note = getNoteByIdUseCase.execute(noteId);
+                android.util.Log.d("Add_new", "Заметка: " + (note != null ? note.getTittle() : "null"));
+                return note;
+            } catch (Exception e) {
+                android.util.Log.e("Add_new", "Ошибка загрузки", e);
+                return null;
+            }
         }
 
         @Override
@@ -129,8 +136,8 @@ public class Add_new extends AppCompatActivity {
             super.onPostExecute(success);
             if (success) {
                 Toast.makeText(Add_new.this, "Заметка сохранена", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Add_new.this, MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Add_new.this, MainActivity.class);
+                //startActivity(intent);
                 finish();
             } else {
                 Toast.makeText(Add_new.this, "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
@@ -139,12 +146,37 @@ public class Add_new extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class UpdateNoteTask extends AsyncTask<Note, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Note... notes) {
-            try {
-                return updateNoteUseCase.execute(notes[0]);
+    private class LoadAndUpdateNoteTask extends AsyncTask<Void, Void, Boolean> {
+        private final int id;
+        private final String newTitle;
+        private final String newDesc;
+        private final String newPriority;
 
+        // Конструктор принимает параметры
+        LoadAndUpdateNoteTask(int id, String newTitle, String newDesc, String newPriority) {
+            this.id = id;
+            this.newTitle = newTitle;
+            this.newDesc = newDesc;
+            this.newPriority = newPriority;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                // Загружаем существующую заметку
+                Note existingNote = getNoteByIdUseCase.execute(id);
+                if (existingNote != null) {
+                    // Создаем обновленную заметку с СОХРАНЕНИЕМ СТАРОЙ ДАТЫ
+                    Note updatedNote = new Note(
+                            existingNote.getId(),
+                            newTitle,
+                            existingNote.getDate(),
+                            newDesc,
+                            newPriority
+                    );
+                    return updateNoteUseCase.execute(updatedNote);
+                }
+                return false;
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -156,8 +188,8 @@ public class Add_new extends AppCompatActivity {
             super.onPostExecute(success);
             if (success) {
                 Toast.makeText(Add_new.this, "Заметка обновлена", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Add_new.this, MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Add_new.this, MainActivity.class);
+                //startActivity(intent);
                 finish();
             } else {
                 Toast.makeText(Add_new.this, "Ошибка при обновлении", Toast.LENGTH_SHORT).show();

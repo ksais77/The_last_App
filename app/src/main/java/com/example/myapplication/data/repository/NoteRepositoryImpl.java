@@ -24,7 +24,9 @@ public  class NoteRepositoryImpl extends NoteRepository {
 
     @Override
     public Note getNoteById(int id) {
+        android.util.Log.d("Repository", "getById called with id=" + id);
         NoteEntity entity = noteDao.getById(id);
+        android.util.Log.d("Repository", "Entity found: " + (entity != null ? entity.getTittle() : "null"));
         return NoteMapper.toDomain(entity);
     }
 

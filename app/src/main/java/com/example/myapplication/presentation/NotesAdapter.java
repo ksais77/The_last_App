@@ -79,11 +79,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         }
 
         holder.itemView.setOnClickListener(v -> {
+            int noteId = notes.get(position).getId();
+            String noteTitle = notes.get(position).getTittle();
+
+            android.util.Log.d("DEBUG", "=== НАЖАТИЕ НА ЗАМЕТКУ ===");
+            android.util.Log.d("DEBUG", "Позиция: " + position);
+            android.util.Log.d("DEBUG", "ID из notes.get(position).getId(): " + noteId);
+            android.util.Log.d("DEBUG", "Заголовок: " + noteTitle);
+            android.util.Log.d("DEBUG", "Весь объект Note: " + notes.get(position).toString());
+
             Intent intent = new Intent(context, Add_new.class);
-            intent.putExtra("id", notes.get(position).getId());
+            intent.putExtra("id", noteId);
             context.startActivity(intent);
         });
-
         holder.itemView.setOnLongClickListener(v -> {
             int position_delete = holder.getAdapterPosition();
             if (position_delete != RecyclerView.NO_POSITION) {

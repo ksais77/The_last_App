@@ -17,7 +17,7 @@ public class Note {
     private  long date;
 
     public Note(int id, String title, String description, String priority) {
-        this.id = 0;
+        this.id = id;
         this.title = title;
         this.description = description;
         this.date = System.currentTimeMillis();
